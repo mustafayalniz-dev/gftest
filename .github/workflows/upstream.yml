@@ -18,7 +18,6 @@ jobs:
       - name: Set matrix for build
         id: set-matrix
         run: |
-          (( $(( (`date +\%s` / 604800 + 1) % 2 )) ))
           echo "::set-output name=matrix::$( node scripts/upstream_list.js )"
   pull-request:
     name: Pull Request to Upstream Release "${{ matrix.upstream_release }}"
