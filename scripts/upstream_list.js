@@ -1,9 +1,9 @@
 var child_process = require("child_process");
 
-const GITHUB_REF = process.env.GITHUB_REF
-const currentBranch = GITHUB_REF.replace("refs/heads/", "")
+//const GITHUB_REF = process.env.GITHUB_REF
+//const currentBranch = GITHUB_REF.replace("refs/heads/", "")
 
-//var currentBranch = process.argv.slice(2)[0]
+var currentBranch = process.argv.slice(2)[0]
 
 
 if ( currentBranch == "" ) {
