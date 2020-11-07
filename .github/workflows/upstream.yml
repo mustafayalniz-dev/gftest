@@ -15,9 +15,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+      - name: Set matrix for build
         id: set-matrix
         run: |
-          echo "::set-output name=matrix::$( node scripts/upstream_list.js )"
+          echo "::set-output name=matrix::$( node scripts/upstream_list.js ${{ github.base_ref }} )"
   pull-request:
     name: Pull Request to Upstream Release "${{ matrix.upstream_release }}"
     needs: generate-matrix
