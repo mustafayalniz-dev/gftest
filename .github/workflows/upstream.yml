@@ -15,9 +15,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.MY_PERSONAL_ACCESS_TOKEN }}
       - name: Set matrix for build
         id: set-matrix
         run: |
+          (( $(( (`date +\%s` / 604800 + 1) % 2 )) )) && node scripts/upstream_list.js ${{ github.base_ref }}
           echo "::set-output name=matrix::$( node scripts/upstream_list.js ${{ github.base_ref }} )"
   pull-request:
     name: Pull Request to Upstream Release "${{ matrix.upstream_release }}"
