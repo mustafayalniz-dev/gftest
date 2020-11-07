@@ -19,7 +19,7 @@ jobs:
         id: set-matrix
         run: |
           (( $(( (`date +\%s` / 604800 + 1) % 2 )) )) && matrix=$(node scripts/upstream.js)
-          echo "::set-output name=matrix::$( echo "$matrix" )"
+          echo "::set-output name=matrix::$( node scripts/upstream.js )"
   pull-request:
     name: Pull Request to Upstream Release "${{ matrix.upstream_release }}"
     needs: generate-matrix
