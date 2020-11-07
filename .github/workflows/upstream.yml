@@ -15,7 +15,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Set matrix for build
         id: set-matrix
         run: |
           echo "::set-output name=matrix::$( node scripts/upstream_list.js )"
