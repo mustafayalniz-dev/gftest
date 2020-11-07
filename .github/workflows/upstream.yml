@@ -23,7 +23,7 @@ jobs:
     name: Pull Request to Upstream Release "${{ matrix.upstream_release }}"
     needs: generate-matrix
     strategy:
-      matrix: ${{needs.generate-matrix.outputs.matrix}}
+      matrix: ${{fromJson(needs.generate-matrix.outputs.matrix)}}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
