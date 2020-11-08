@@ -19,6 +19,7 @@ var versionNumber = major_version.toString() + minor_version.toString() + patch_
 
 async function getBranchArray() { 
     
+    var test0 = child_process.execSync('git pull');
     var test = child_process.execSync('git branch --remote -a | grep release');
     var branches = test.toString().replace(/remotes\/origin\//g,"").replace(/\s+/g, ' ').trim()
     var branchArray = branches.split(" ");
