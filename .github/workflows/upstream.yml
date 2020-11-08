@@ -9,7 +9,6 @@ on:
 jobs:
   generate-matrix:
     name: Generate matrix for pull requests
-    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
@@ -29,7 +28,6 @@ jobs:
           echo "::set-output name=matrix::$( node scripts/upstream_list.js ${{ github.base_ref }} )"
   pull-request:
     name: Pull Request to Upstream Release "${{ matrix.upstream_release }}"
-    if: github.event.pull_request.merged == true
     needs: generate-matrix
     strategy:
       matrix: ${{fromJson(needs.generate-matrix.outputs.matrix)}}
@@ -37,7 +35,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: pull-request
-        if:   ${{ matrix.upstream_release }} != ''
+        if:   ${{ matrix.upstream_release }} != '' && github.event.pull_request.merged == true
         uses: repo-sync/pull-request@v2
         with:
           source_branch: ${{  github.head_ref }} 
