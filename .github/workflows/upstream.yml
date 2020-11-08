@@ -35,7 +35,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: pull-request
-        if:   ${{ matrix.upstream_release }} != '' && github.event.pull_request.merged == true
+        if:   ${{ matrix.upstream_release }} != '' && github.event.pull_request.merged == true && contains(github.event.comment.body, '/release-train')
         uses: repo-sync/pull-request@v2
         with:
           source_branch: ${{  github.head_ref }} 
